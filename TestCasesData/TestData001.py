@@ -27,6 +27,7 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
+import time
 
 
 class testdata(unittest.TestCase):
@@ -43,15 +44,17 @@ class testdata(unittest.TestCase):
         driver.find_element(By.XPATH, "//form/input").send_keys('2023/4/9')
         driver.find_element(By.XPATH, "//div[2]/input").send_keys('83')
         driver.find_element(By.XPATH, "//button[@name='submit']").click()
+        time.sleep(5)
         # driver.find_element(By.XPATH, "//body").click()
+
         try:
-           WebDriverWait(driver, 3).until(EC.alert_is_present(),
-                                           '...done!')
+           WebDriverWait(driver, 5).until(EC.alert_is_present(),
+                                          '...done!')
 
            alert = driver.switch_to.alert
            alert.accept()
            print("alert accepted")
-
+           time.sleep(6)
         except TimeoutException:
             print("no alert")
             # self.assertIn("...done!", driver.page_source)
